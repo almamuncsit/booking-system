@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
 use App\Models\Room;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -58,7 +57,7 @@ class RoomController extends Controller
         //validate incoming request
         $this->validate( $request, [
             'room_number' => 'required|string|unique:rooms',
-            'price'       => 'required',
+            'price'       => 'required|numeric',
             'locked'      => 'required|boolean',
             'max_persons' => 'required|numeric',
             'root_type'   => 'required|string',

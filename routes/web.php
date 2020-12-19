@@ -52,6 +52,10 @@ $router->group( [ 'prefix' => 'api' ], function () use ( $router ) {
         $router->get( 'payments',          'PaymentController@index' );
         $router->post( 'payments',          'PaymentController@store' );
         $router->delete( 'payments/{id}',   'PaymentController@destroy' );
+
+        $router->post( 'check-in',          'CheckInController@checkIn' );
+        $router->post( 'check-out',         'CheckOutController@checkOut' );
+
     } );
 
 } );
