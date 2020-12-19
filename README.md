@@ -1,3 +1,8 @@
+# My Information
+Name: Al-Mamun Sarkar
+
+Eamil: msarkar.cse@gmail.com
+
 # Booking System
 ```git clone https://github.com/almamuncsit/booking-system.git```
 
