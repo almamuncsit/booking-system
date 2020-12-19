@@ -39,6 +39,7 @@ $router->group( [ 'prefix' => 'api' ], function () use ( $router ) {
 
         // Routes for Booking
         $router->get( 'bookings',           'BookingController@index' );
+        $router->get( 'bookings/{id}',      'BookingController@show' );
         $router->post( 'bookings',          'BookingController@store' );
         $router->delete( 'bookings/{id}',   'BookingController@destroy' );
 

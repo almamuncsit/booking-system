@@ -30,4 +30,12 @@ class Booking extends Model
     {
         return $this->belongsTo( Room::class );
     }
+
+    /*
+     * Room of booking
+     */
+    public function customer()
+    {
+        return $this->belongsTo( Customer::class );
+    }
 }

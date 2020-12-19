@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PaymentResource;
 use App\Models\Booking;
 use App\Models\Payment;
 use Carbon\Carbon;
@@ -21,7 +22,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return Payment::paginate( 50 );
+        $payments = Payment::with( 'customer' )->paginate( 50 );
+
+        return PaymentResource::collection( $payments );
     }
 
 
@@ -57,7 +60,7 @@ class PaymentController extends Controller
                 $booking->payment_status = 'due';
             }
             $booking->save();
-            
+
             return $this->success( 'Booked Successfully' );
         } catch ( Exception $e ) {
             return $this->failed( 'Failed to Book!' );

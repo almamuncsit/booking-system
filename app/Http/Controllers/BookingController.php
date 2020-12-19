@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BookingDetailsResource;
+use App\Http\Resources\BookingResource;
 use App\Models\Booking;
 use Carbon\Carbon;
 use Exception;
@@ -20,9 +22,21 @@ class BookingController extends Controller
      */
     public function index()
     {
-        return Booking::paginate( 50 );
+        $bookings = Booking::with( 'room', 'customer' )->paginate( 50 );
+
+        return BookingResource::collection( $bookings );
     }
 
+    public function show( $id )
+    {
+        $booking = Booking::find( $id );
+
+        if ( $booking ) {
+            return new BookingDetailsResource( $booking );
+        }
+
+        return $this->failed( 'Booking no found' );
+    }
 
     /**
      * Create new booking
