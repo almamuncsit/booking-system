@@ -39,6 +39,7 @@ Run the following command on the project root directory.
 # Import the following JSON file fo Postman for testing the API from root folder. 
  `project.postman_collection.json`
  
+ 
  ## Add an environment with following variable
  Value of auth_token will be the auth token return from jwt login end point
  
@@ -46,6 +47,10 @@ Run the following command on the project root directory.
 api_endpoint = http://localhost:8000/api/v1
 auth_token = paste_the_token_from_login_response
 ```
+
+# API Documentation
+[https://documenter.getpostman.com/view/5772299/TVssjobN](https://documenter.getpostman.com/view/5772299/TVssjobN) 
+
 
 # Running Unit Test
 `phpunit` has been used for unit testing. So please make sure that `phpunit` is installed on your computer.
