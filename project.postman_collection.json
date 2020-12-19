@@ -293,7 +293,7 @@
 									"type": "text"
 								},
 								{
-									"key": "root_type",
+									"key": "room_type",
 									"value": "premium",
 									"type": "text"
 								}
@@ -413,13 +413,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{api_endpoint}}/bookings/4",
+							"raw": "{{api_endpoint}}/bookings/1",
 							"host": [
 								"{{api_endpoint}}"
 							],
 							"path": [
 								"bookings",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -431,13 +431,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_endpoint}}/bookings/1",
+							"raw": "{{api_endpoint}}/bookings/2",
 							"host": [
 								"{{api_endpoint}}"
 							],
 							"path": [
 								"bookings",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -469,7 +469,7 @@
 							"formdata": [
 								{
 									"key": "booking_id",
-									"value": "1",
+									"value": "2",
 									"type": "text"
 								},
 								{
@@ -563,7 +563,7 @@
 							"formdata": [
 								{
 									"key": "booking_id",
-									"value": "1",
+									"value": "2",
 									"type": "text"
 								}
 							]
@@ -590,7 +590,7 @@
 							"formdata": [
 								{
 									"key": "booking_id",
-									"value": "1",
+									"value": "2",
 									"type": "text"
 								}
 							]

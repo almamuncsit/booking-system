@@ -46,47 +46,11 @@ class CustomerController extends Controller
         try {
             $customer = Customer::create( $data );
 
-            return response()->json( [ 'user' => $customer, 'message' => 'Customer Added Successfully' ], 201 );
+            return response()->json( [ 'customer' => $customer, 'message' => 'Customer Added Successfully' ], 201 );
         } catch ( Exception $e ) {
             return $this->failed( 'Failed to add customer!' );
         }
     }
-
-
-    //    /**
-    //     * Update a Customer
-    //     *
-    //     * @param Request $request
-    //     * @param         $id
-    //     * @return array
-    //     * @throws ValidationException
-    //     */
-    //    public function update( Request $request, $id )
-    //    {
-    //        //validate incoming request
-    //        $this->validate( $request, [
-    //            'first_name' => 'required|string',
-    //            'last_name'  => 'required|string',
-    //            'email'      => 'required|email',
-    //            'phone'      => 'required',
-    //        ] );
-    //
-    //        $data = $request->all();
-    //
-    //        try {
-    //            $customer             = Customer::findOrFail( $id );
-    //            $customer->first_name = $data[ 'first_name' ];
-    //            $customer->last_name  = $data[ 'last_name' ];
-    //            $customer->email      = $data[ 'email' ];
-    //            $customer->phone      = $data[ 'first_name' ];
-    //            $customer->save();
-    //
-    //            return response()->json( [ 'user' => $customer, 'message' => 'Customer Updated Successfully' ], 201 );
-    //        } catch ( Exception $e ) {
-    //            return $this->failed( 'Failed to add customer!' );
-    //        }
-    //    }
-
 
     /**
      * Delete a customer

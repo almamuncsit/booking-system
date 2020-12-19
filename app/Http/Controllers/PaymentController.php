@@ -54,6 +54,7 @@ class PaymentController extends Controller
         try {
             Payment::create( $data );
 
+            // Update booking payment status
             $paid = $booking->payments->sum( 'amount' );
             if ( $paid >= $booking->room->price ) {
                 $booking->payment_status = 'paid';

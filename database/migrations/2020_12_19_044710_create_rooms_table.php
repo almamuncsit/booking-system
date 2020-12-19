@@ -19,7 +19,7 @@ class CreateRoomsTable extends Migration
             $table->double( 'price' );
             $table->boolean( 'locked' );
             $table->integer( 'max_persons' );
-            $table->string( 'root_type' );
+            $table->string( 'room_type' );
             $table->timestamps();
         } );
     }

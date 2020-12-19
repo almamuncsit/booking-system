@@ -60,7 +60,7 @@ class RoomController extends Controller
             'price'       => 'required|numeric',
             'locked'      => 'required|boolean',
             'max_persons' => 'required|numeric',
-            'root_type'   => 'required|string',
+            'room_type'   => 'required|string',
         ] );
 
         $data = $request->all();

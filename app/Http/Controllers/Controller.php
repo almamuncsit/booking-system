@@ -15,7 +15,7 @@ class Controller extends BaseController
     }
 
     /*
-     * Return Success Message
+     * Return Failed Message
      */
     public function failed( $message, $status = 409 )
     {

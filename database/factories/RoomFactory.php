@@ -26,7 +26,7 @@ class RoomFactory extends Factory
             'price'       => $this->faker->numberBetween( 1000, 1000 ),
             'locked'      => 0,
             'max_persons' => $this->faker->numberBetween( 1, 4 ),
-            'root_type'   => $this->faker->randomKey( [ 'premium', 'normal', 'vip' ] )
+            'room_type'   => $this->faker->randomKey( [ 'premium', 'normal', 'vip' ] )
         ];
     }
 }
