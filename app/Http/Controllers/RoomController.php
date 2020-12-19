@@ -23,6 +23,18 @@ class RoomController extends Controller
 
 
     /**
+     * Return All Available Rooms
+     * Available room means unlocked rooms
+     *
+     * @return mixed
+     */
+    public function availableRooms()
+    {
+        return Room::where( 'locked', false )->get();
+    }
+
+
+    /**
      * Add new Room
      *
      * @param Request $request
@@ -52,7 +64,7 @@ class RoomController extends Controller
     }
 
     /**
-     * Delete a customer
+     * Delete a Room
      *
      * @param $id
      * @return JsonResponse
@@ -60,7 +72,7 @@ class RoomController extends Controller
     public function destroy( $id )
     {
         try {
-            Room::find( $id )->delete();
+            Room::destroy( $id );
 
             return $this->success( 'Room Deleted Successfully' );
         } catch ( Exception $e ) {

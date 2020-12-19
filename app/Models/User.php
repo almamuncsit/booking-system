@@ -53,5 +53,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return [];
     }
 
+    public function bookings()
+    {
+        return $this->hasMany( Booking::class );
+    }
+
 
 }

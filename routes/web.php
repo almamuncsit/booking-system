@@ -20,23 +20,31 @@ $router->get( '/', function () use ( $router ) {
 
 $router->group( [ 'prefix' => 'api' ], function () use ( $router ) {
 
-    $router->post( 'register', 'AuthController@register' );
-    $router->post( 'login', 'AuthController@login' );
+    $router->post( 'register',          'AuthController@register' );
+    $router->post( 'login',             'AuthController@login' );
 
     $router->group( [ 'middleware' => 'auth' ], function () use ( $router ) {
-        $router->get( 'auth-user', 'AuthController@authUser' );
+        $router->get( 'auth-user',          'AuthController@authUser' );
 
         // Routes for customers
-        $router->get( 'customers', 'CustomerController@index' );
-        $router->post( 'customers', 'CustomerController@store' );
-//        $router->post( 'customers/{id}', 'CustomerController@update' );
-        $router->delete( 'customers/{id}', 'CustomerController@destroy' );
+        $router->get( 'customers',          'CustomerController@index' );
+        $router->post( 'customers',         'CustomerController@store' );
+        $router->delete( 'customers/{id}',  'CustomerController@destroy' );
 
         // Routes for rooms
-        $router->get( 'rooms', 'RoomController@index' );
-        $router->post( 'rooms', 'RoomController@store' );
-        $router->delete( 'rooms/{id}', 'RoomController@destroy' );
+        $router->get( 'rooms',              'RoomController@index' );
+        $router->post( 'rooms',             'RoomController@store' );
+        $router->delete( 'rooms/{id}',      'RoomController@destroy' );
+        $router->get( 'available-rooms',    'RoomController@availableRooms' );
 
+        // Routes for Booking
+        $router->get( 'bookings',           'BookingController@index' );
+        $router->post( 'bookings',          'BookingController@store' );
+        $router->delete( 'bookings/{id}',   'BookingController@destroy' );
+
+        $router->get( 'payments',          'PaymentController@index' );
+        $router->post( 'payments',          'PaymentController@store' );
+        $router->delete( 'payments/{id}',   'PaymentController@destroy' );
     } );
 
 } );
