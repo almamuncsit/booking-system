@@ -20,7 +20,6 @@ class CreateCustomersTable extends Migration
             $table->string( 'email', 150 );
             $table->string( 'phone', 15 );
             $table->timestamp( 'registered_at' );
-            $table->timestamps();
         } );
     }
 

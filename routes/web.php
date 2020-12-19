@@ -13,23 +13,32 @@
 |
 */
 
-$router->get('/', function () use ($router) {
+$router->get( '/', function () use ( $router ) {
     return $router->app->version();
-});
+} );
 
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group( [ 'prefix' => 'api' ], function () use ( $router ) {
 
-    $router->post('register', 'AuthController@register');
-    $router->post('login', 'AuthController@login');
+    $router->post( 'register', 'AuthController@register' );
+    $router->post( 'login', 'AuthController@login' );
 
-    $router->group(['middleware' => 'auth'], function () use ($router) {
-        $router->get('auth-user', 'AuthController@authUser');
+    $router->group( [ 'middleware' => 'auth' ], function () use ( $router ) {
+        $router->get( 'auth-user', 'AuthController@authUser' );
 
-        $router->get('customers', 'CustomerController@index');
+        // Routes for customers
+        $router->get( 'customers', 'CustomerController@index' );
+        $router->post( 'customers', 'CustomerController@store' );
+//        $router->post( 'customers/{id}', 'CustomerController@update' );
+        $router->delete( 'customers/{id}', 'CustomerController@destroy' );
 
-    });
+        // Routes for rooms
+        $router->get( 'rooms', 'RoomController@index' );
+        $router->post( 'rooms', 'RoomController@store' );
+        $router->delete( 'rooms/{id}', 'RoomController@destroy' );
 
-});
+    } );
+
+} );
 
 

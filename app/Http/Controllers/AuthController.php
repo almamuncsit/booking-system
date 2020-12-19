@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 
 class AuthController extends Controller
@@ -22,8 +25,8 @@ class AuthController extends Controller
      * Store a new user.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return JsonResponse
+     * @throws ValidationException
      */
     public function register( Request $request )
     {
@@ -46,7 +49,7 @@ class AuthController extends Controller
 
             //return successful response
             return response()->json( [ 'user' => $user, 'message' => 'User Registered Successfully' ], 201 );
-        } catch ( \Exception $e ) {
+        } catch ( Exception $e ) {
             //return error message
             return response()->json( [ 'message' => 'User Registration Failed!' ], 409 );
         }
@@ -76,7 +79,7 @@ class AuthController extends Controller
      *
      * @param string $token
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     protected function respondWithToken( $token )
     {
@@ -90,7 +93,7 @@ class AuthController extends Controller
     /**
      * Get the authenticated User.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function authUser()
     {
@@ -100,7 +103,7 @@ class AuthController extends Controller
     /**
      * Log the user out (Invalidate the token).
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function logout()
     {
@@ -112,7 +115,7 @@ class AuthController extends Controller
     /**
      * Refresh a token.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function refresh()
     {
