@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Room;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
 class RoomController extends Controller
@@ -18,7 +20,13 @@ class RoomController extends Controller
      */
     public function index()
     {
-        return Room::paginate( 50 );
+        $page = ( request()->get( 'page' ) ) ? request()->get( 'page' ) : 1;
+
+        $rooms = Cache::tags( [ 'room_list' ] )->rememberForever( 'room_list_' . $page, function () {
+            return Room::paginate( 50 );
+        } );
+
+        return $rooms;
     }
 
 
@@ -30,7 +38,11 @@ class RoomController extends Controller
      */
     public function availableRooms()
     {
-        return Room::where( 'locked', false )->get();
+        $value = Cache::rememberForever( 'available_rooms', function () {
+            return Room::where( 'locked', false )->get();
+        } );
+
+        return $value;
     }
 
 
@@ -45,7 +57,7 @@ class RoomController extends Controller
     {
         //validate incoming request
         $this->validate( $request, [
-            'room_number' => 'required|string',
+            'room_number' => 'required|string|unique:rooms',
             'price'       => 'required',
             'locked'      => 'required|boolean',
             'max_persons' => 'required|numeric',
@@ -56,6 +68,10 @@ class RoomController extends Controller
 
         try {
             Room::create( $data );
+
+            // Remove Available Rooms Cache
+            Cache::forget( 'available_rooms' );
+            Cache::tags( 'room_list' )->flush();
 
             return $this->success( 'Room Added Successfully' );
         } catch ( Exception $e ) {
@@ -73,6 +89,9 @@ class RoomController extends Controller
     {
         try {
             Room::destroy( $id );
+            // Remove Available Rooms Cache
+            Cache::forget( 'available_rooms' );
+            Cache::tags( 'room_list' )->flush();
 
             return $this->success( 'Room Deleted Successfully' );
         } catch ( Exception $e ) {

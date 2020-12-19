@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
 class PaymentController extends Controller
@@ -61,6 +62,9 @@ class PaymentController extends Controller
             }
             $booking->save();
 
+            // Delete Booking Cache
+            Cache::forget( 'booking_' . $booking->id );
+
             return $this->success( 'Booked Successfully' );
         } catch ( Exception $e ) {
             return $this->failed( 'Failed to Book!' );
@@ -77,7 +81,10 @@ class PaymentController extends Controller
     public function destroy( $id )
     {
         try {
-            Payment::destroy( $id );
+            $payment = Payment::find( $id );
+            // Delete Booking Cache
+            Cache::forget( 'booking_' . $payment->booking_id );
+            $payment->delete();
 
             return $this->success( 'Booking Deleted Successfully' );
         } catch ( Exception $e ) {

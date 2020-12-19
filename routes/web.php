@@ -20,6 +20,12 @@ $router->get( '/', function () use ( $router ) {
 
 $router->group( [ 'prefix' => 'api' ], function () use ( $router ) {
 
+    $router->get( '/test', function () {
+        \Illuminate\Support\Facades\Cache::put('name', 'Mamun');
+
+        return \Illuminate\Support\Facades\Cache::get('name');
+    } );
+
     $router->post( 'register',          'AuthController@register' );
     $router->post( 'login',             'AuthController@login' );
 
