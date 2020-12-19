@@ -23,6 +23,9 @@ class CheckInController extends Controller
         try {
             CheckIn::create( $data );
             $booking = Booking::find($data['booking_id']);
+            $booking->arrival = Carbon::now(); // Update Arrival timve
+            $booking->save();
+
             $booking->room->locked = true;
             $booking->room->save();
 

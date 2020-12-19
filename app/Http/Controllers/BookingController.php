@@ -63,8 +63,6 @@ class BookingController extends Controller
     {
         //validate incoming request
         $data = $this->validate( $request, [
-            'arrival'     => 'required|date',
-            'checkout'    => 'required|date',
             'room_id'     => 'required|numeric|exists:rooms,id',
             'customer_id' => 'required|numeric|exists:customers,id'
         ] );

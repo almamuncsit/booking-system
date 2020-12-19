@@ -18,16 +18,11 @@ $router->get( '/', function () use ( $router ) {
 } );
 
 
-$router->group( [ 'prefix' => 'api' ], function () use ( $router ) {
-
-    $router->get( '/test', function () {
-        \Illuminate\Support\Facades\Cache::put('name', 'Mamun');
-
-        return \Illuminate\Support\Facades\Cache::get('name');
-    } );
+$router->group( [ 'prefix' => 'api/v1' ], function () use ( $router ) {
 
     $router->post( 'register',          'AuthController@register' );
     $router->post( 'login',             'AuthController@login' );
+    $router->post('refresh',            'AuthController@refresh');;
 
     $router->group( [ 'middleware' => 'auth' ], function () use ( $router ) {
         $router->get( 'auth-user',          'AuthController@authUser' );

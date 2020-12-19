@@ -23,6 +23,9 @@ class CheckOutController extends Controller
         try {
             CheckOut::create( $data );
             $booking = Booking::find($data['booking_id']);
+            $booking->checkout = Carbon::now(); // Update Arrival timve
+            $booking->save();
+
             $booking->room->locked = false;
             $booking->room->save();
 
