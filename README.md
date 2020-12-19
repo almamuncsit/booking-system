@@ -62,3 +62,6 @@ Go to the project root folder run the following command for running unit tests.
 If `phpunit` don't have installed on your computer then run the following command.
 
 `vendor/phpunit/phpunit/phpunit`
+
+# Database ERD
+![ERD](database.png)
